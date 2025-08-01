@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <title>Test Page - RadMentor</title>
+    <!-- Common layout elements will be injected here by layout.js -->
+</head>
+<body class="text-gray-800">
+    <!-- Header will be injected here by layout.js -->
+
+    <!-- Main Content Area -->
+    <main class="content-area">
+        <div class="container mx-auto px-6 py-8">
+            <!-- Breadcrumb -->
+            <div id="breadcrumb-container"></div>
+            
+            <!-- Back Button -->
+            <div id="back-button-container"></div>
+            
+            <!-- Page Content -->
+            <div class="text-center mb-10">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900">Test Page</h1>
+                <p class="mt-3 text-lg text-gray-600">This is a test page to demonstrate the consistent layout system.</p>
+            </div>
+
+            <!-- Demo Content -->
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white p-8 rounded-xl shadow-lg mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Layout System Features</h2>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>✅ Consistent header across all pages</li>
+                        <li>✅ Consistent footer across all pages</li>
+                        <li>✅ Automatic navigation path detection</li>
+                        <li>✅ Responsive design</li>
+                        <li>✅ Authentication state management</li>
+                        <li>✅ Common styling and components</li>
+                    </ul>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Example content cards -->
+                    <div class="nav-button bg-white p-8 rounded-xl flex flex-col items-center justify-center text-center cursor-pointer">
+                        <i data-feather="check-circle" class="w-12 h-12 text-green-600 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-gray-800">Consistent Layout</h3>
+                        <p class="mt-2 text-gray-500">Same header and footer on every page.</p>
+                    </div>
+
+                    <div class="nav-button bg-white p-8 rounded-xl flex flex-col items-center justify-center text-center cursor-pointer">
+                        <i data-feather="zap" class="w-12 h-12 text-blue-600 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-gray-800">Easy to Use</h3>
+                        <p class="mt-2 text-gray-500">Just include the layout.js script and you're done.</p>
+                    </div>
+
+                    <div class="nav-button bg-white p-8 rounded-xl flex flex-col items-center justify-center text-center cursor-pointer">
+                        <i data-feather="code" class="w-12 h-12 text-purple-600 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-gray-800">Modular</h3>
+                        <p class="mt-2 text-gray-500">Components can be used independently.</p>
+                    </div>
+
+                    <div class="nav-button bg-white p-8 rounded-xl flex flex-col items-center justify-center text-center cursor-pointer">
+                        <i data-feather="smartphone" class="w-12 h-12 text-orange-600 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-gray-800">Responsive</h3>
+                        <p class="mt-2 text-gray-500">Works perfectly on all devices.</p>
+                    </div>
+                </div>
+
+                <!-- Demo of breadcrumb and back button -->
+                <div class="bg-gray-50 p-8 rounded-xl mt-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Navigation Components</h3>
+                    <p class="text-gray-600 mb-4">This page demonstrates:</p>
+                    <ul class="text-gray-600 space-y-1">
+                        <li>• Breadcrumb navigation (see above)</li>
+                        <li>• Back button functionality</li>
+                        <li>• Consistent header with proper logo path resolution</li>
+                        <li>• Footer with correct relative links</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer will be injected here by layout.js -->
+
+    <!-- Include the layout system -->
+    <script src="js/layout.js"></script>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add breadcrumb
+            const breadcrumbContainer = document.getElementById('breadcrumb-container');
+            if (breadcrumbContainer) {
+                breadcrumbContainer.innerHTML = window.RadMentorLayout.getBreadcrumb([
+                    { name: 'Test Page', url: '#' }
+                ]);
+            }
+
+            // Add back button
+            const backButtonContainer = document.getElementById('back-button-container');
+            if (backButtonContainer) {
+                backButtonContainer.innerHTML = window.RadMentorLayout.getBackButton('index.html', 'Back to Home');
+            }
+
+            // Initialize Feather icons
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+        });
+    </script>
+</body>
+</html>

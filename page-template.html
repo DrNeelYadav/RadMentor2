@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <title>Page Title - RadMentor</title>
+    <!-- Common layout elements will be injected here by layout.js -->
+</head>
+<body class="text-gray-800">
+    <!-- Header will be injected here by layout.js -->
+
+    <!-- Main Content Area -->
+    <main class="content-area">
+        <div class="container mx-auto px-6 py-8">
+            <!-- Breadcrumb (optional) -->
+            <div id="breadcrumb-container"></div>
+            
+            <!-- Back Button (optional) -->
+            <div id="back-button-container"></div>
+            
+            <!-- Page Content -->
+            <div class="text-center mb-10">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900">Page Title</h1>
+                <p class="mt-3 text-lg text-gray-600">Page description goes here.</p>
+            </div>
+
+            <!-- Your page-specific content goes here -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Example content cards -->
+                <div class="nav-button bg-white p-8 rounded-xl flex flex-col items-center justify-center text-center cursor-pointer">
+                    <i data-feather="book" class="w-12 h-12 text-blue-600 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-gray-800">Example Item</h3>
+                    <p class="mt-2 text-gray-500">Description of the item.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer will be injected here by layout.js -->
+
+    <!-- Include the layout system -->
+    <script src="js/layout.js"></script>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        // Example of using layout system features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add breadcrumb if needed
+            const breadcrumbContainer = document.getElementById('breadcrumb-container');
+            if (breadcrumbContainer) {
+                breadcrumbContainer.innerHTML = window.RadMentorLayout.getBreadcrumb([
+                    { name: 'Section', url: '../index.html' },
+                    { name: 'Current Page', url: '#' }
+                ]);
+            }
+
+            // Add back button if needed
+            const backButtonContainer = document.getElementById('back-button-container');
+            if (backButtonContainer) {
+                backButtonContainer.innerHTML = window.RadMentorLayout.getBackButton('../index.html', 'Back to Dashboard');
+            }
+
+            // Initialize Feather icons
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+        });
+    </script>
+</body>
+</html>
