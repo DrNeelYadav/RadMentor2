@@ -16,23 +16,11 @@
     <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../style.css">
+
     <style>
-        /* Custom styles to complement Tailwind */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Light gray background */
-        }
-
-        /* Custom gradient for buttons and highlights */
-        .rad-gradient {
-            background: linear-gradient(90deg, #1e40af, #3b82f6);
-        }
-        .rad-gradient-text {
-            background: linear-gradient(90deg, #1e40af, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
+        /* Additional styles specific to FRCR page */
         .nav-button {
             transition: all 0.2s ease-in-out;
             border: 1px solid #e5e7eb;
@@ -212,6 +200,9 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 
     <!-- Main App Script -->
+    <!-- Layout utilities -->
+    <script src="../layout-utils.js"></script>
+    
     <script src="../app.js"></script>
 
     <script>

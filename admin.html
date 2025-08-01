@@ -16,21 +16,22 @@
     <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
     <style>
+        /* Additional styles specific to admin page */
         body {
-            font-family: 'Inter', sans-serif;
-        }
-        .rad-gradient {
-            background: linear-gradient(90deg, #1e40af, #3b82f6);
+            background-color: #f8fafc; /* Match main site background */
         }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="text-gray-800">
 
     <div id="admin-dashboard" class="hidden">
         <!-- Admin Topbar -->
-        <header class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
-            <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-sm">
+            <div class="container mx-auto px-6 py-3 flex justify-between items-center h-full">
                 <div class="flex items-center">
                     <img src="https://raw.githubusercontent.com/im2famous4u/RadMentor/main/logo.png" alt="RadMentor Logo" class="h-8 mr-3"/>
                     <span class="text-xl font-bold text-gray-800">RadMentor <span class="text-blue-600 font-semibold">Admin</span></span>
@@ -45,8 +46,8 @@
         </header>
 
         <!-- Main Content -->
-        <main class="pt-24 pb-12">
-            <div class="container mx-auto px-6">
+        <main class="flex-1">
+            <div class="container mx-auto px-6 py-8">
                 <h1 class="text-3xl font-bold text-gray-900 mb-8">Admin Dashboard</h1>
 
                 <!-- User Management Table -->
