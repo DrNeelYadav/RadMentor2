@@ -1,11 +1,106 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RadMentor - Comprehensive Radiology Learning Source</title>
-    <!-- Common layout elements will be injected here by layout.js -->
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <style>
+        /* Custom styles to complement Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+        }
+
+        /* Custom gradient for buttons and highlights */
+        .rad-gradient {
+            background: linear-gradient(90deg, #1e40af, #3b82f6);
+        }
+        .rad-gradient-text {
+            background: linear-gradient(90deg, #1e40af, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Styles for the dashboard part */
+        .dashboard-grid-item {
+            transition: all 0.2s ease-in-out;
+            border: 1px solid #e5e7eb;
+        }
+        .dashboard-grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: #3b82f6;
+        }
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
 </head>
 <body class="text-gray-800">
-    <!-- Header will be injected here by layout.js -->
+
+    <!-- This header is now persistent and changes based on login state -->
+    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://raw.githubusercontent.com/im2famous4u/RadMentor/main/logo.png" alt="RadMentor Logo" class="h-10 mr-3"/>
+                <span class="text-2xl font-bold text-gray-800">RadMentor</span>
+            </div>
+            <nav id="main-nav" class="hidden md:flex items-center space-x-8">
+                <a href="#courses" class="text-gray-600 hover:text-blue-600">Courses</a>
+                <a href="#features" class="text-gray-600 hover:text-blue-600">Features</a>
+                <a href="#about" class="text-gray-600 hover:text-blue-600">About Us</a>
+            </nav>
+            <div class="flex items-center">
+                <!-- Logged Out Buttons -->
+                <div id="header-logged-out" class="flex items-center">
+                    <button onclick="showAuthModal('signin')" class="hidden md:block text-gray-600 hover:text-blue-600 mr-6">Login</button>
+                    <button onclick="showAuthModal('signup')" class="rad-gradient text-white font-semibold px-5 py-2 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                        Sign Up
+                    </button>
+                </div>
+                <!-- Logged In Buttons -->
+                <div id="header-logged-in" class="hidden items-center">
+                     <span class="hidden sm:block text-gray-700 mr-4">Hi, <span id="user-greeting-header"></span>!</span>
+                     <button onclick="showDashboard()" class="rad-gradient text-white font-semibold px-5 py-2 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                        Dashboard
+                    </button>
+                    <button onclick="logout()" class="ml-4 text-gray-600 hover:text-blue-600" title="Logout">
+                        <i data-feather="log-out"></i>
+                    </button>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden ml-4 text-gray-700">
+                    <i data-feather="menu"></i>
+                </button>
+            </div>
+        </div>
+          <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#courses" class="block py-2 text-gray-600 hover:text-blue-600">Courses</a>
+            <a href="#features" class="block py-2 text-gray-600 hover:text-blue-600">Features</a>
+            <a href="#about" class="block py-2 text-gray-600 hover:text-blue-600">About Us</a>
+            <!-- Mobile Logged Out -->
+            <div id="mobile-logged-out">
+                <button onclick="showAuthModal('signin')" class="block w-full text-left py-2 text-gray-600 hover:text-blue-600">Login</button>
+            </div>
+             <!-- Mobile Logged In -->
+            <div id="mobile-logged-in" class="hidden">
+                <button onclick="showDashboard()" class="block w-full text-left py-2 text-gray-600 hover:text-blue-600">Dashboard</button>
+                <button onclick="logout()" class="block w-full text-left py-2 text-gray-600 hover:text-blue-600">Logout</button>
+            </div>
+        </div>
+    </header>
 
     <!-- =================================================
     LANDING PAGE SECTION
@@ -16,7 +111,7 @@
             <section class="bg-white pt-32 pb-20">
                 <div class="container mx-auto px-6 text-center">
                     <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
-                        The World's Most Comprehensive <br class="hidden md:block" /> <span class="rad-gradient-text">Radiology Learning Source</span>
+                        The World’s Most Comprehensive <br class="hidden md:block" /> <span class="rad-gradient-text">Radiology Learning Source</span>
                     </h1>
                     <p class="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">
                         Master radiology with our expert-curated Q-banks, mock exams, and in-depth content. Built by radiologists, for future radiologists.
@@ -106,18 +201,44 @@
                     </div>
                     <div class="max-w-4xl mx-auto bg-white p-10 rounded-xl shadow-lg text-center">
                         <p class="text-lg text-gray-600">
-                            We are two radiologists trained at one of India's premier medical institutes, united by a shared vision: to make high-quality radiology education accessible, affordable, and reliable for all. Every question, explanation, and update is curated by us, backed by evidence, and rooted in real-world radiology practice.
+                            We are two radiologists trained at one of India’s premier medical institutes, united by a shared vision: to make high-quality radiology education accessible, affordable, and reliable for all. Every question, explanation, and update is curated by us, backed by evidence, and rooted in real-world radiology practice.
                         </p>
                           <p class="mt-4 text-lg font-semibold text-gray-800">Welcome to a community built with precision and care.</p>
                     </div>
                 </div>
             </section>
         </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white">
+            <div class="container mx-auto px-6 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold">RadMentor</h3>
+                        <p class="mt-2 text-gray-400">The future of radiology education.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold">Quick Links</h3>
+                        <ul class="mt-2 space-y-2">
+                            <li><a href="#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                            <li><a href="#features" class="text-gray-400 hover:text-white">Features</a></li>
+                            <li><a href="#" onclick="showAuthModal('signup')" class="text-gray-400 hover:text-white">Sign Up</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold">Contact</h3>
+                         <p class="mt-2 text-gray-400">Email: <a href="mailto:support@radmentor.com" class="hover:text-white">support@radmentor.com</a></p>
+                    </div>
+                </div>
+                <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500">
+                    &copy; 2024 RadMentor. All Rights Reserved.
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <!-- Footer will be injected here by layout.js -->
-
     <!-- AUTHENTICATION MODAL, PROFILE FORM -->
+    <!-- These sections are the same as before -->
     <div id="auth-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md relative">
             <button onclick="hideAuthModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
@@ -190,7 +311,7 @@
         <div class="fixed top-0 left-0 right-0 bg-white shadow-md z-40">
             <div class="container mx-auto px-6 h-16 flex justify-between items-center">
                 <div class="flex items-center cursor-pointer" onclick="showLandingPage()">
-                    <img src="logo.png" alt="RadMentor Logo" class="h-8"/>
+                    <img src="https://raw.githubusercontent.com/im2famous4u/RadMentor/main/logo.png" alt="RadMentor Logo" class="h-8"/>
                     <span class="text-xl font-bold text-gray-800 ml-2">RadMentor</span>
                 </div>
                 <div class="flex items-center">
@@ -296,15 +417,15 @@
         </div>
     </div>
 
-    <!-- Include the layout system -->
-    <script src="js/layout.js"></script>
-
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 
     <script>
+        // --- Feather Icons Initialization ---
+        feather.replace();
+
         // --- Firebase Configuration ---
         const firebaseConfig = {
             apiKey: "AIzaSyD-OTIwv6P88eT2PCPJXiHgZEDgFV8ZcSw",
@@ -335,9 +456,22 @@
         const landingPage = document.getElementById('landing-page');
         const dashboard = document.getElementById('dashboard');
         const profileFormContainer = document.getElementById('profile-form-container');
+        const headerLoggedOut = document.getElementById('header-logged-out');
+        const headerLoggedIn = document.getElementById('header-logged-in');
+        const userGreetingHeader = document.getElementById('user-greeting-header');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLoggedOut = document.getElementById('mobile-logged-out');
+        const mobileLoggedIn = document.getElementById('mobile-logged-in');
         const mainDashboardContent = document.getElementById('dashboard-main-content');
         const frcrPartsView = document.getElementById('frcr-parts-view');
         const frcrPart1SubjectsView = document.getElementById('frcr-part1-subjects-view');
+
+
+        // --- Event Listeners ---
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
 
         // --- Auth Modal Logic ---
         function showAuthModal(mode = 'signin') {
@@ -432,7 +566,7 @@
                 .then(() => {
                     currentUserData = { ...currentUserData, ...profileData };
                     profileFormContainer.classList.add('hidden');
-                    setupLoggedInState(currentUserData);
+                    setupLoggedInState(currentUserData); // Go back to landing page with logged-in header
                 })
                 .catch(err => alert("Error saving profile: " + err.message));
         }
@@ -462,27 +596,34 @@
                 });
 
             } else {
+                // User is signed out
                 currentUserData = null;
                 setupLoggedOutState();
             }
         });
 
         function setupLoggedInState(userData) {
+            headerLoggedOut.classList.add('hidden');
+            headerLoggedIn.classList.remove('hidden');
+            mobileLoggedOut.classList.add('hidden');
+            mobileLoggedIn.classList.remove('hidden');
+            userGreetingHeader.textContent = userData.name.split(' ')[0];
+            
             landingPage.classList.remove('hidden');
             dashboard.classList.add('hidden');
-            
-            // Update layout system with auth state
-            window.RadMentorLayout.setAuthState(true, userData);
+            feather.replace();
         }
 
         function setupLoggedOutState() {
+            headerLoggedOut.classList.remove('hidden');
+            headerLoggedIn.classList.add('hidden');
+            mobileLoggedOut.classList.remove('hidden');
+            mobileLoggedIn.classList.add('hidden');
+
             landingPage.classList.remove('hidden');
             dashboard.classList.add('hidden');
             profileFormContainer.classList.add('hidden');
             hideAuthModal();
-            
-            // Update layout system with auth state
-            window.RadMentorLayout.setAuthState(false);
         }
         
         function showDashboard() {
@@ -545,7 +686,7 @@
             feather.replace();
         }
 
-        // --- Dashboard View Functions ---
+        // --- NEW Dashboard View Functions ---
         function showMainDashboard() {
             mainDashboardContent.classList.remove('hidden');
             frcrPartsView.classList.add('hidden');
@@ -619,16 +760,6 @@
             collegeDatalist.appendChild(option);
         });
 
-        // Initialize layout and features
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize layout system
-            window.RadMentorLayout.initializePage('default');
-            
-            // Initialize Feather icons
-            if (typeof feather !== 'undefined') {
-                feather.replace();
-            }
-        });
     </script>
 
 </body>

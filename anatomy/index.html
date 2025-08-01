@@ -1,31 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Anatomy Section - RadMentor</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/feather-icons"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-        }
-        .nav-button {
-            transition: all 0.2s ease-in-out;
-            border: 1px solid #e5e7eb;
-        }
-        .nav-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            border-color: #3b82f6;
-        }
-    </style>
+    <!-- Common layout elements will be injected here by layout.js -->
 </head>
 <body class="text-gray-800">
+    <!-- Header will be injected here by layout.js -->
 
-    <div class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
+    <!-- Main Content Area -->
+    <main class="content-area">
+        <div class="container mx-auto px-6 py-8">
+            <!-- Back Button -->
+            <div id="back-button-container"></div>
+            
+            <div class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
         <div class="w-full max-w-5xl">
             <!-- Header -->
             <div class="text-center mb-10">
@@ -70,9 +58,28 @@
             </div>
         </div>
     </div>
+        </div>
+    </main>
 
+    <!-- Footer will be injected here by layout.js -->
+
+    <!-- Include the layout system -->
+    <script src="../js/layout.js"></script>
+    
+    <!-- Page-specific JavaScript -->
     <script>
-        feather.replace();
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add back button
+            const backButtonContainer = document.getElementById('back-button-container');
+            if (backButtonContainer) {
+                backButtonContainer.innerHTML = window.RadMentorLayout.getBackButton('../index.html', 'Back to Dashboard');
+            }
+
+            // Initialize Feather icons
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+        });
     </script>
 
 </body>
