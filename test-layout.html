@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title id="page-title">RadMentor - Comprehensive Radiology Learning Source</title>
+    <title>RadMentor - Test Layout</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -38,20 +38,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        /* Styles for the dashboard part */
-        .dashboard-grid-item {
-            transition: all 0.2s ease-in-out;
-            border: 1px solid #e5e7eb;
-        }
-        .dashboard-grid-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            border-color: #3b82f6;
-        }
-        .sidebar {
-            transition: transform 0.3s ease-in-out;
-        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -65,9 +51,9 @@
             </div>
             <nav id="main-nav" class="hidden md:flex items-center space-x-8">
                 <a href="index.html" class="text-gray-600 hover:text-blue-600">Home</a>
-                <a href="index.html#courses" class="text-gray-600 hover:text-blue-600">Courses</a>
-                <a href="index.html#features" class="text-gray-600 hover:text-blue-600">Features</a>
-                <a href="index.html#about" class="text-gray-600 hover:text-blue-600">About Us</a>
+                <a href="#courses" class="text-gray-600 hover:text-blue-600">Courses</a>
+                <a href="#features" class="text-gray-600 hover:text-blue-600">Features</a>
+                <a href="#about" class="text-gray-600 hover:text-blue-600">About Us</a>
             </nav>
             <div class="flex items-center">
                 <!-- Logged Out Buttons -->
@@ -95,9 +81,9 @@
           <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
             <a href="index.html" class="block py-2 text-gray-600 hover:text-blue-600">Home</a>
-            <a href="index.html#courses" class="block py-2 text-gray-600 hover:text-blue-600">Courses</a>
-            <a href="index.html#features" class="block py-2 text-gray-600 hover:text-blue-600">Features</a>
-            <a href="index.html#about" class="block py-2 text-gray-600 hover:text-blue-600">About Us</a>
+            <a href="#courses" class="block py-2 text-gray-600 hover:text-blue-600">Courses</a>
+            <a href="#features" class="block py-2 text-gray-600 hover:text-blue-600">Features</a>
+            <a href="#about" class="block py-2 text-gray-600 hover:text-blue-600">About Us</a>
             <!-- Mobile Logged Out -->
             <div id="mobile-logged-out">
                 <button onclick="showAuthModal('signin')" class="block w-full text-left py-2 text-gray-600 hover:text-blue-600">Login</button>
@@ -114,10 +100,36 @@
     MAIN CONTENT AREA
     ================================================== -->
     <main id="page-content" class="pt-20 min-h-screen">
-        <!-- Page content will be dynamically loaded here -->
+        <!-- Test Content -->
         <div class="container mx-auto px-6 py-8">
-            <h1 class="text-3xl font-bold text-gray-800 mb-8">Welcome to RadMentor</h1>
-            <p class="text-gray-600">This is a template page. Content will be loaded dynamically.</p>
+            <h1 class="text-3xl font-bold text-gray-800 mb-8">Layout Test Page</h1>
+            <p class="text-gray-600 mb-6">This page demonstrates the consistent layout system. The header, navigation, and overall structure remain constant while only the content changes.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold mb-4">Consistent Header</h3>
+                    <p class="text-gray-600">The header stays fixed at the top with consistent styling across all pages.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold mb-4">Navigation</h3>
+                    <p class="text-gray-600">Navigation links work seamlessly without page reloads.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold mb-4">Responsive Design</h3>
+                    <p class="text-gray-600">Layout adapts perfectly to different screen sizes.</p>
+                </div>
+            </div>
+            
+            <div class="bg-blue-50 p-6 rounded-lg">
+                <h2 class="text-2xl font-bold text-blue-800 mb-4">How It Works</h2>
+                <ul class="text-blue-700 space-y-2">
+                    <li>• Header remains fixed and consistent across all pages</li>
+                    <li>• Navigation uses hash-based routing for smooth transitions</li>
+                    <li>• Content area changes dynamically without page reloads</li>
+                    <li>• Footer maintains consistent styling and positioning</li>
+                    <li>• All styling is centralized in style.css for consistency</li>
+                </ul>
+            </div>
         </div>
     </main>
 
@@ -172,49 +184,6 @@
         </div>
     </div>
 
-    <!-- PROFILE FORM CONTAINER -->
-    <div id="profile-form-container" class="fixed inset-0 bg-gray-100 z-50 p-4 hidden overflow-y-auto">
-        <div class="bg-white rounded-2xl shadow-xl w-full max-w-2xl mx-auto my-8 p-8 md:p-12">
-             <h1 class="text-3xl font-bold text-gray-900 text-center">Complete Your Profile</h1>
-             <p class="text-gray-600 text-center mb-8">Please provide a few more details to get started.</p>
-             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="md:col-span-2"><input type="text" id="name" placeholder="Full Name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></div>
-                <div>
-                    <label class="font-medium text-gray-700">Date of Birth</label>
-                    <input type="date" id="dob" class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div>
-                    <label class="font-medium text-gray-700">Sex</label>
-                    <select id="sex" class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="" disabled selected>Select Sex</option>
-                        <option>Male</option><option>Female</option><option>Other</option>
-                    </select>
-                </div>
-                 <div>
-                    <label class="font-medium text-gray-700">Position</label>
-                    <select id="position" class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="" disabled selected>Select Position</option>
-                        <option>Intern</option><option>Junior Resident</option><option>Senior Resident</option><option>Consultant</option>
-                    </select>
-                </div>
-                 <div>
-                    <label class="font-medium text-gray-700">Exam Pursuing</label>
-                    <select id="exam_pursuing" class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="" disabled selected>Select Exam</option>
-                        <option>Final year exam</option><option>DNB</option><option>FRCR</option><option>NEET SS</option><option>INICET SS</option><option>MICR</option><option>Fellowship exams</option>
-                    </select>
-                </div>
-                <div class="md:col-span-2">
-                      <label class="font-medium text-gray-700">Medical College</label>
-                      <input list="colleges" id="college" placeholder="Type to search your college" class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                      <datalist id="colleges">
-                      </datalist>
-                </div>
-             </div>
-             <button onclick="submitProfile()" class="w-full rad-gradient text-white font-bold py-3 rounded-lg mt-8 text-lg hover:shadow-lg transition-shadow">Submit Profile</button>
-        </div>
-    </div>
-
     <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
@@ -228,6 +197,31 @@
         document.addEventListener('DOMContentLoaded', function() {
             feather.replace();
         });
+        
+        // Mock functions for testing
+        function showAuthModal(type) {
+            document.getElementById('auth-modal').classList.remove('hidden');
+        }
+        
+        function hideAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+        }
+        
+        function handleAuth() {
+            alert('Auth functionality would be implemented here');
+        }
+        
+        function toggleAuth() {
+            alert('Toggle auth functionality would be implemented here');
+        }
+        
+        function showDashboard() {
+            alert('Dashboard functionality would be implemented here');
+        }
+        
+        function logout() {
+            alert('Logout functionality would be implemented here');
+        }
     </script>
 </body>
 </html>
