@@ -481,6 +481,36 @@ window.updateUserAccess = (userId) => {
 
 
 // =================================================================
+// LAYOUT INTEGRATION FUNCTIONS
+// =================================================================
+
+// Function to load landing page content (used by layout manager)
+window.loadLandingPageContent = function(container) {
+    // This function will be called by the layout manager to load the home page content
+    // The content is already in the HTML, so we just need to ensure it's visible
+    const landingContent = document.querySelector('#page-content');
+    if (landingContent) {
+        container.innerHTML = landingContent.innerHTML;
+    }
+};
+
+// Function to show dashboard (updated for new layout)
+window.showDashboard = function() {
+    if (window.layoutManager) {
+        window.location.hash = '#dashboard';
+        window.layoutManager.handleRouteChange();
+    }
+};
+
+// Function to show landing page (updated for new layout)
+window.showLandingPage = function() {
+    if (window.layoutManager) {
+        window.location.hash = '#home';
+        window.layoutManager.handleRouteChange();
+    }
+};
+
+// =================================================================
 // UTILITY FUNCTIONS
 // =================================================================
 
