@@ -1,9 +1,20 @@
-<!DOCTYPE html>
+#!/usr/bin/env node
+
+/**
+ * RadMentor Page Generator
+ * Creates new pages with consistent layout
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+// Template for new pages
+const pageTemplate = `<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RadMentor - Anatomy Modules</title>
+    <title>RadMentor - {{PAGE_TITLE}}</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -54,10 +65,10 @@
                 <span class="text-2xl font-bold text-gray-800">RadMentor</span>
             </div>
             <nav id="main-nav" class="hidden md:flex items-center space-x-8">
-                <a href="../index.html" class="text-gray-600 hover:text-blue-600">Home</a>
-                <a href="../index.html#courses" class="text-gray-600 hover:text-blue-600">Courses</a>
-                <a href="../index.html#features" class="text-gray-600 hover:text-blue-600">Features</a>
-                <a href="../index.html#about" class="text-gray-600 hover:text-blue-600">About Us</a>
+                <a href="{{HOME_LINK}}" class="text-gray-600 hover:text-blue-600">Home</a>
+                <a href="{{HOME_LINK}}#courses" class="text-gray-600 hover:text-blue-600">Courses</a>
+                <a href="{{HOME_LINK}}#features" class="text-gray-600 hover:text-blue-600">Features</a>
+                <a href="{{HOME_LINK}}#about" class="text-gray-600 hover:text-blue-600">About Us</a>
             </nav>
             <div class="flex items-center">
                 <!-- Logged Out Buttons -->
@@ -72,10 +83,10 @@
                      <span class="hidden sm:block text-gray-700 mr-4">Hi, <span id="user-greeting-header"></span>!</span>
                      <button onclick="showDashboard()" class="rad-gradient text-white font-semibold px-5 py-2 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                         Dashboard
-                    </button>
-                    <button onclick="logout()" class="ml-4 text-gray-600 hover:text-blue-600" title="Logout">
+                     </button>
+                     <button onclick="logout()" class="ml-4 text-gray-600 hover:text-blue-600" title="Logout">
                         <i data-feather="log-out"></i>
-                    </button>
+                     </button>
                 </div>
                 <button id="mobile-menu-button" class="md:hidden ml-4 text-gray-700">
                     <i data-feather="menu"></i>
@@ -84,10 +95,10 @@
         </div>
           <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="../index.html" class="block py-2 text-gray-600 hover:text-blue-600">Home</a>
-            <a href="../index.html#courses" class="block py-2 text-gray-600 hover:text-blue-600">Courses</a>
-            <a href="../index.html#features" class="block py-2 text-gray-600 hover:text-blue-600">Features</a>
-            <a href="../index.html#about" class="block py-2 text-gray-600 hover:text-blue-600">About Us</a>
+            <a href="{{HOME_LINK}}" class="block py-2 text-gray-600 hover:text-blue-600">Home</a>
+            <a href="{{HOME_LINK}}#courses" class="block py-2 text-gray-600 hover:text-blue-600">Courses</a>
+            <a href="{{HOME_LINK}}#features" class="block py-2 text-gray-600 hover:text-blue-600">Features</a>
+            <a href="{{HOME_LINK}}#about" class="block py-2 text-gray-600 hover:text-blue-600">About Us</a>
             <!-- Mobile Logged Out -->
             <div id="mobile-logged-out">
                 <button onclick="showAuthModal('signin')" class="block w-full text-left py-2 text-gray-600 hover:text-blue-600">Login</button>
@@ -102,49 +113,15 @@
 
     <!-- Main Content -->
     <main class="pt-20">
-        <div class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
-            <div class="w-full max-w-5xl">
-                <!-- Header -->
-                <div class="text-center mb-10">
-                    <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900">Anatomy Modules</h1>
-                    <p class="mt-3 text-lg text-gray-600">Explore our detailed anatomy resources.</p>
-                </div>
-
-                <!-- Navigation Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- CT Anatomy Button -->
-                    <a href="ct-anatomy/" class="nav-button bg-white p-8 sm:p-10 rounded-xl flex flex-col items-center justify-center text-center cursor-pointer">
-                        <i data-feather="layers" class="w-12 h-12 text-blue-600 mb-4"></i>
-                        <h3 class="text-2xl sm:text-3xl font-bold text-gray-800">CT Anatomy</h3>
-                        <p class="mt-2 text-gray-500">Explore detailed cross-sectional CT anatomy.</p>
-                    </a>
-                    <!-- MRI Anatomy Button -->
-                    <a href="mri-anatomy/" class="nav-button bg-white p-8 sm:p-10 rounded-xl flex flex-col items-center justify-center text-center cursor-pointer">
-                        <i data-feather="git-branch" class="w-12 h-12 text-blue-600 mb-4"></i>
-                        <h3 class="text-2xl sm:text-3xl font-bold text-gray-800">MRI Anatomy</h3>
-                        <p class="mt-2 text-gray-500">Dive into complex MRI anatomical structures.</p>
-                    </a>
-                    <!-- Gross Anatomy Button -->
-                    <a href="gross-anatomy/" class="nav-button bg-white p-8 sm:p-10 rounded-xl flex flex-col items-center justify-center text-center cursor-pointer">
-                        <i data-feather="compass" class="w-12 h-12 text-blue-600 mb-4"></i>
-                        <h3 class="text-2xl sm:text-3xl font-bold text-gray-800">Gross Anatomy</h3>
-                        <p class="mt-2 text-gray-500">Study the fundamental structures of the human body.</p>
-                    </a>
-                    <!-- USG Anatomy Button -->
-                    <a href="usg-anatomy/" class="nav-button bg-white p-8 sm:p-10 rounded-xl flex flex-col items-center justify-center text-center cursor-pointer">
-                        <i data-feather="activity" class="w-12 h-12 text-blue-600 mb-4"></i>
-                        <h3 class="text-2xl sm:text-3xl font-bold text-gray-800">USG Anatomy</h3>
-                        <p class="mt-2 text-gray-500">Understand anatomy through ultrasound imaging.</p>
-                    </a>
-                </div>
-
-                <!-- Back Button -->
-                <div class="mt-12 text-center">
-                    <button onclick="history.back()" class="flex items-center text-gray-600 hover:text-blue-600 mx-auto">
-                        <i data-feather="arrow-left" class="mr-2"></i>
-                        <span>Back to Dashboard</span>
-                    </button>
-                </div>
+        <!-- Your page content goes here -->
+        <div class="container mx-auto px-6 py-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-6">{{PAGE_HEADING}}</h1>
+            <p class="text-lg text-gray-600 mb-8">{{PAGE_DESCRIPTION}}</p>
+            
+            <!-- Add your page-specific content here -->
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Content Section</h2>
+                <p class="text-gray-600">This is where your page content will go.</p>
             </div>
         </div>
     </main>
@@ -194,7 +171,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 
     <!-- Main App Script -->
-    <script src="../app.js"></script>
+    <script src="{{APP_JS_PATH}}"></script>
 
     <script>
         // Initialize Feather Icons
@@ -218,4 +195,51 @@
     </script>
 
 </body>
-</html>
+</html>`;
+
+function createPage(pageName, pageTitle, pageHeading, pageDescription, outputPath) {
+    // Determine the relative path to home and app.js based on output path
+    const pathDepth = outputPath.split('/').length - 1;
+    const homeLink = '../'.repeat(pathDepth) + 'index.html';
+    const appJsPath = '../'.repeat(pathDepth) + 'app.js';
+    
+    // Replace placeholders in template
+    let content = pageTemplate
+        .replace(/{{PAGE_TITLE}}/g, pageTitle)
+        .replace(/{{PAGE_HEADING}}/g, pageHeading)
+        .replace(/{{PAGE_DESCRIPTION}}/g, pageDescription)
+        .replace(/{{HOME_LINK}}/g, homeLink)
+        .replace(/{{APP_JS_PATH}}/g, appJsPath);
+    
+    // Create directory if it doesn't exist
+    const dir = path.dirname(outputPath);
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+    }
+    
+    // Write the file
+    fs.writeFileSync(outputPath, content);
+    console.log(`✅ Created page: ${outputPath}`);
+}
+
+// Command line interface
+if (require.main === module) {
+    const args = process.argv.slice(2);
+    
+    if (args.length < 4) {
+        console.log(`
+Usage: node create-page.js <page-name> <page-title> <page-heading> <page-description> [output-path]
+
+Examples:
+  node create-page.js "my-page" "My Page" "My Page Heading" "This is a description" "pages/my-page.html"
+  node create-page.js "anatomy/ct" "CT Anatomy" "CT Anatomy" "Learn CT anatomy" "anatomy/ct/index.html"
+        `);
+        process.exit(1);
+    }
+    
+    const [pageName, pageTitle, pageHeading, pageDescription, outputPath = `${pageName}.html`] = args;
+    
+    createPage(pageName, pageTitle, pageHeading, pageDescription, outputPath);
+}
+
+module.exports = { createPage };
