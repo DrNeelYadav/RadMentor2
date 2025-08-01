@@ -2,6 +2,43 @@
 body {
     font-family: 'Inter', sans-serif;
     background-color: #f8fafc; /* Light gray background */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure consistent header height */
+header {
+    height: 80px; /* Fixed header height */
+    min-height: 80px;
+}
+
+/* Ensure main content takes remaining space and has consistent padding */
+main {
+    flex: 1;
+    min-height: calc(100vh - 80px - 200px); /* viewport - header - footer */
+    padding-top: 80px; /* Match header height */
+}
+
+/* Ensure consistent footer height */
+footer {
+    min-height: 200px;
+    margin-top: auto;
+}
+
+/* Prevent content width shifts */
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+/* Ensure consistent page content container */
+#page-content {
+    min-height: calc(100vh - 280px); /* viewport - header - footer */
+    width: 100%;
 }
 
 /* Custom gradient for buttons and highlights */
