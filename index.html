@@ -43,6 +43,17 @@
         .sidebar {
             transition: transform 0.3s ease-in-out;
         }
+
+        /* Page transition animations */
+        .page-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease-in-out;
+        }
+        .page-content.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -55,9 +66,10 @@
                 <span class="text-2xl font-bold text-gray-800">RadMentor</span>
             </div>
             <nav id="main-nav" class="hidden md:flex items-center space-x-8">
-                <a href="index.html#courses" class="text-gray-600 hover:text-blue-600">Courses</a>
-                <a href="index.html#features" class="text-gray-600 hover:text-blue-600">Features</a>
-                <a href="index.html#about" class="text-gray-600 hover:text-blue-600">About Us</a>
+                <a href="#" onclick="loadPage('home')" class="nav-link text-gray-600 hover:text-blue-600" data-page="home">Home</a>
+                <a href="#" onclick="loadPage('courses')" class="nav-link text-gray-600 hover:text-blue-600" data-page="courses">Courses</a>
+                <a href="#" onclick="loadPage('features')" class="nav-link text-gray-600 hover:text-blue-600" data-page="features">Features</a>
+                <a href="#" onclick="loadPage('about')" class="nav-link text-gray-600 hover:text-blue-600" data-page="about">About Us</a>
             </nav>
             <div class="flex items-center">
                 <!-- Logged Out Buttons -->
@@ -84,9 +96,10 @@
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="index.html#courses" class="block py-2 text-gray-600 hover:text-blue-600">Courses</a>
-            <a href="index.html#features" class="block py-2 text-gray-600 hover:text-blue-600">Features</a>
-            <a href="index.html#about" class="block py-2 text-gray-600 hover:text-blue-600">About Us</a>
+            <a href="#" onclick="loadPage('home')" class="block py-2 text-gray-600 hover:text-blue-600">Home</a>
+            <a href="#" onclick="loadPage('courses')" class="block py-2 text-gray-600 hover:text-blue-600">Courses</a>
+            <a href="#" onclick="loadPage('features')" class="block py-2 text-gray-600 hover:text-blue-600">Features</a>
+            <a href="#" onclick="loadPage('about')" class="block py-2 text-gray-600 hover:text-blue-600">About Us</a>
             <!-- Mobile Logged Out -->
             <div id="mobile-logged-out">
                 <button onclick="showAuthModal('signin')" class="block w-full text-left py-2 text-gray-600 hover:text-blue-600">Login</button>
@@ -99,150 +112,51 @@
         </div>
     </header>
 
-    <!-- Landing Page -->
-    <div id="landing-page">
-        <main>
-            <!-- Hero Section -->
-            <section class="bg-white pt-32 pb-20">
-                <div class="container mx-auto px-6 text-center">
-                    <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
-                        The World's Most Comprehensive <br class="hidden md:block" /> <span class="rad-gradient-text">Radiology Learning Source</span>
-                    </h1>
-                    <p class="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">
-                        Master radiology with our expert-curated Q-banks, mock exams, and in-depth content. Built by radiologists, for future radiologists.
-                    </p>
-                    <div class="mt-8 flex justify-center gap-4">
-                        <button onclick="showAuthModal('signup')" class="rad-gradient text-white font-bold px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-shadow text-lg">
-                            Get Started for Free
-                        </button>
-                    </div>
-                </div>
-            </section>
+    <!-- Main Content Area -->
+    <main class="pt-20">
+        <div id="page-content" class="page-content">
+            <!-- Content will be dynamically loaded here -->
+        </div>
+    </main>
 
-            <!-- Courses Section -->
-            <section id="courses" class="py-20">
-                <div class="container mx-auto px-6">
-                    <div class="text-center mb-12">
-                        <h2 class="text-4xl font-bold text-gray-900">Prepare for Any Exam</h2>
-                        <p class="mt-4 text-lg text-gray-600">Targeted preparation for all major radiology exams.</p>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <a href="frcr/" class="dashboard-grid-item bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow border border-gray-100">
-                            <h3 class="text-2xl font-bold text-gray-800">FRCR</h3>
-                            <p class="mt-2 text-gray-600">Comprehensive question banks and mock tests for the FRCR exam.</p>
-                        </a>
-                        <div class="dashboard-grid-item bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow border border-gray-100">
-                            <h3 class="text-2xl font-bold text-gray-800">MD / DNB</h3>
-                            <p class="mt-2 text-gray-600">Master your final year exams with our targeted content.</p>
-                        </div>
-                        <a href="anatomy/" class="dashboard-grid-item bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow border border-gray-100">
-                            <h3 class="text-2xl font-bold text-gray-800">Anatomy</h3>
-                            <p class="mt-2 text-gray-600">Detailed anatomical modules to build a strong foundation.</p>
-                        </a>
-                        <div class="dashboard-grid-item bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow border border-gray-100">
-                            <h3 class="text-2xl font-bold text-gray-800">MICR</h3>
-                            <p class="mt-2 text-gray-600">Practice with MCQs tailored for the MICR examination.</p>
-                        </div>
-                        <div class="dashboard-grid-item bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow border border-gray-100">
-                            <h3 class="text-2xl font-bold text-gray-800">Superspeciality</h3>
-                            <p class="mt-2 text-gray-600">Prepare for NEET SS & INICET SS with high-yield questions.</p>
-                        </div>
-                        <div class="dashboard-grid-item bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow border border-gray-100">
-                            <h3 class="text-2xl font-bold text-gray-800">Fellowship Exams</h3>
-                            <p class="mt-2 text-gray-600">Excel in your fellowship exams with our specialized modules.</p>
-                        </div>
-                    </div>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-20">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">RadMentor</h3>
+                    <p class="text-gray-400">The world's most comprehensive radiology learning source.</p>
                 </div>
-            </section>
-
-            <!-- Features Section -->
-            <section id="features" class="py-20 bg-white">
-                <div class="container mx-auto px-6">
-                    <div class="text-center mb-12">
-                        <h2 class="text-4xl font-bold text-gray-900">Why RadMentor?</h2>
-                        <p class="mt-4 text-lg text-gray-600">Everything you need to succeed, all in one place.</p>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-                        <div class="p-6">
-                            <div class="rad-gradient w-16 h-16 rounded-full mx-auto flex items-center justify-center shadow-lg">
-                                <i data-feather="award" class="text-white"></i>
-                            </div>
-                            <h3 class="mt-6 text-xl font-bold">Expert-Curated Content</h3>
-                            <p class="mt-2 text-gray-600">All questions and explanations are created and verified by top radiologists.</p>
-                        </div>
-                        <div class="p-6">
-                            <div class="rad-gradient w-16 h-16 rounded-full mx-auto flex items-center justify-center shadow-lg">
-                                <i data-feather="target" class="text-white"></i>
-                            </div>
-                            <h3 class="mt-6 text-xl font-bold">Realistic Exam Simulation</h3>
-                            <p class="mt-2 text-gray-600">Experience the real exam environment with our timed mock tests.</p>
-                        </div>
-                        <div class="p-6">
-                            <div class="rad-gradient w-16 h-16 rounded-full mx-auto flex items-center justify-center shadow-lg">
-                                <i data-feather="bar-chart-2" class="text-white"></i>
-                            </div>
-                            <h3 class="mt-6 text-xl font-bold">Performance Analytics</h3>
-                            <p class="mt-2 text-gray-600">Track your progress, identify weak areas, and improve your scores.</p>
-                        </div>
-                    </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Courses</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" onclick="loadPage('frcr')" class="hover:text-white">FRCR</a></li>
+                        <li><a href="#" onclick="loadPage('md-dnb')" class="hover:text-white">MD/DNB</a></li>
+                        <li><a href="#" onclick="loadPage('anatomy')" class="hover:text-white">Anatomy</a></li>
+                        <li><a href="#" onclick="loadPage('micr')" class="hover:text-white">MICR</a></li>
+                    </ul>
                 </div>
-            </section>
-
-            <!-- About Us Section -->
-            <section id="about" class="py-20">
-                <div class="container mx-auto px-6">
-                    <div class="text-center mb-12">
-                        <h2 class="text-4xl font-bold text-gray-900">Built by Doctors, for Doctors</h2>
-                    </div>
-                    <div class="max-w-4xl mx-auto bg-white p-10 rounded-xl shadow-lg text-center">
-                        <p class="text-lg text-gray-600">
-                            We are two radiologists trained at one of India's premier medical institutes, united by a shared vision: to make high-quality radiology education accessible, affordable, and reliable for all. Every question, explanation, and update is curated by us, backed by evidence, and rooted in real-world radiology practice.
-                        </p>
-                        <p class="mt-4 text-lg font-semibold text-gray-800">Welcome to a community built with precision and care.</p>
-                    </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                    </ul>
                 </div>
-            </section>
-        </main>
-
-        <!-- Footer -->
-        <footer class="bg-gray-900 text-white py-12">
-            <div class="container mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div>
-                        <h3 class="text-xl font-bold mb-4">RadMentor</h3>
-                        <p class="text-gray-400">The world's most comprehensive radiology learning source.</p>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold mb-4">Courses</h4>
-                        <ul class="space-y-2 text-gray-400">
-                            <li><a href="frcr/" class="hover:text-white">FRCR</a></li>
-                            <li><a href="#" class="hover:text-white">MD/DNB</a></li>
-                            <li><a href="anatomy/" class="hover:text-white">Anatomy</a></li>
-                            <li><a href="#" class="hover:text-white">MICR</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold mb-4">Support</h4>
-                        <ul class="space-y-2 text-gray-400">
-                            <li><a href="#" class="hover:text-white">Contact Us</a></li>
-                            <li><a href="#" class="hover:text-white">FAQ</a></li>
-                            <li><a href="#" class="hover:text-white">Help Center</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold mb-4">Legal</h4>
-                        <ul class="space-y-2 text-gray-400">
-                            <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
-                            <li><a href="#" class="hover:text-white">Terms of Service</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                    <p>&copy; 2024 RadMentor. All rights reserved.</p>
+                <div>
+                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+                    </ul>
                 </div>
             </div>
-        </footer>
-    </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 RadMentor. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- Authentication Modal -->
     <div id="auth-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4 hidden">
@@ -366,14 +280,14 @@
                     <div id="main-section" class="space-y-6">
                         <h1 class="text-3xl font-bold text-gray-900">Welcome to RadMentor</h1>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <a href="frcr/" class="dashboard-grid-item bg-white p-6 rounded-xl shadow-lg">
+                            <a href="#" onclick="loadPage('frcr')" class="dashboard-grid-item bg-white p-6 rounded-xl shadow-lg">
                                 <div class="flex items-center mb-4">
                                     <i data-feather="book-open" class="w-8 h-8 text-blue-600 mr-3"></i>
                                     <h3 class="text-xl font-bold text-gray-800">FRCR</h3>
                                 </div>
                                 <p class="text-gray-600">Comprehensive preparation for the FRCR examination.</p>
                             </a>
-                            <a href="anatomy/" class="dashboard-grid-item bg-white p-6 rounded-xl shadow-lg">
+                            <a href="#" onclick="loadPage('anatomy')" class="dashboard-grid-item bg-white p-6 rounded-xl shadow-lg">
                                 <div class="flex items-center mb-4">
                                     <i data-feather="layers" class="w-8 h-8 text-blue-600 mr-3"></i>
                                     <h3 class="text-xl font-bold text-gray-800">Anatomy</h3>
@@ -431,6 +345,9 @@
 
     <!-- Main App Script -->
     <script src="app.js"></script>
+
+    <!-- SPA Navigation Script -->
+    <script src="spa-navigation.js"></script>
 
     <script>
         // Initialize Feather Icons
@@ -520,6 +437,11 @@
             const option = document.createElement('option');
             option.value = college;
             collegeDatalist.appendChild(option);
+        });
+
+        // Initialize the app with home page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPage('home');
         });
     </script>
 
